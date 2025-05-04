@@ -56,3 +56,14 @@ def create_notes(note: CreateNote):
                             note_date = note.note_date)
     all_notes.append(new_note)
     return all_notes
+
+@app.put('/notes/{note_id}', response_model=NoteStructure)
+def edit_notes(note_id: int, edit_note: UpdateNotes):
+    for note in all_notes:
+        if note.note_identifier == note_id:
+              if edit_note.note_name != None:
+                note.note_name = edit_note.note_name
+              if edit_note.note_body != None:
+                note.note_body = edit_note.note_body
+              if edit_note.note_date != None:
+                note.note_date = edit_note.note_date
