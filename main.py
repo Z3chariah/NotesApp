@@ -67,3 +67,11 @@ def edit_notes(note_id: int, edit_note: UpdateNotes):
                 note.note_body = edit_note.note_body
               if edit_note.note_date != None:
                 note.note_date = edit_note.note_date
+
+
+@app.delete('/notes/{note_id}', response_model= List[NoteStructure])
+def delete_note(note_id: int):
+    for note in all_notes:
+        if note_id == note.note_identifier:
+            all_notes.remove(note)
+            return all_notes
